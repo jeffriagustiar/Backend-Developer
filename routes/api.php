@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', [AController::class, 'regis']);
 Route::post('login', [AController::class, 'login']);
 Route::post('logout', [AController::class, 'logout']);
+Route::get('products',[ProductsController::class, 'all']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('product/add',[ProductsController::class, 'add']);

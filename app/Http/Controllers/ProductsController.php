@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseFormatter;
 use App\Product;
 use Exception;
 use Illuminate\Auth\Events\Validated;
@@ -78,7 +79,6 @@ class ProductsController extends Controller
                     // ->destroy();
                 $dp->delete();
                 return 'berhasil hapus data';
-                return $dp;
                 } catch (Exception $e) {
                     return 'gagal hapus data'.$e;
                 }
@@ -88,5 +88,13 @@ class ProductsController extends Controller
         }else{
             return ' error unauthorized';
         }
+    }
+
+    public function all(Request $request){
+
+        $limit = $request->input('limit');
+
+        return Product::paginate($limit);
+
     }
 }
