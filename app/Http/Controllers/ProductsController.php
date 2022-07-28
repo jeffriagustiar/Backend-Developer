@@ -93,8 +93,31 @@ class ProductsController extends Controller
     public function all(Request $request){
 
         $limit = $request->input('limit');
+        $name = $request->input('name');
+        $type = $request->input('type');
+        $price = $request->input('price');
+        $quantity = $request->input('quantity');
 
-        return Product::paginate($limit);
+        if ($name) {
+            $a=Product::orderBy('name', $name);
+        }
+
+        if ($type) {
+            $a=Product::orderBy('type', $type);
+        }
+        if ($price) {
+            $a=Product::orderBy('price', $price);
+        }
+        
+        if ($quantity) {
+            $a=Product::orderBy('price', $quantity);
+        }
+
+
+
+
+
+        return $a->paginate($limit);
 
     }
 }
